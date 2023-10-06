@@ -8,7 +8,7 @@ router.get('/',(request, response)=>{
     response.send("hey")
 });  
 
-router.post('/signup',(request, response)=>{
+router.post('/register',(request, response)=>{
     // console.log(request.body);
     // console.log(request.body.name);
     // response.json({message: request.body.name});

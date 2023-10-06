@@ -6,6 +6,7 @@ import PlantDetail from './pages/PlantDetail'
 import PlantForm from './pages/PlantForm'
 import PlantProgress from './pages/PlantProgress'
 import Signup from './pages/Signup';
+import Login from './pages/Login';
 function App() {
   return (
     <BrowserRouter> 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/form" element={<PlantForm/>}/> 
           <Route path="/progress" element={<PlantProgress/>}/>  
           <Route path="/signup" element={<Signup/>}/>   
+          <Route path="/login" element={<Login/>}/>
           {/* <Route path="*" element={<h1>Not Found</h1>}/> */}
     </Routes>  
     </BrowserRouter>

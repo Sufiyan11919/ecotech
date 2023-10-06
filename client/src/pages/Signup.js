@@ -1,30 +1,49 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-function Signup() {
-  const [formData, setFormData] = useState({
-    name: '',
-    department: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+import { useNavigate } from 'react-router-dom';
+const Signup = () =>{
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    department: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
   });
+  let name, value;
+  const handleChange = (e) =>{
+    name = e.target.name;
+    value = e.target.value;
+    setUser({...user, [name]:value});
+  }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
+  const postData = async (e) =>{
     e.preventDefault();
-    // You can add your form validation and submission logic here
-    console.log(formData);
-  };
+    const {name, department, email, password, confirmPassword} = user;
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name, department, email, password, confirmPassword
+      })
+    });
 
+    const data = await res.json();
+    if(data.status === 422 || !data){
+      window.alert("Invalid Registration");
+      console.log("Invalid Registration");
+    }else{
+      window.alert("Registration Successful");
+      console.log("Registration Successful");
+      navigate("/login");
+    }
+  }
   return (
     <div className="container">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+      <form method='POST' onSubmit={postData}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name
@@ -34,7 +53,7 @@ function Signup() {
             className="form-control"
             id="name"
             name="name"
-            value={formData.name}
+            value={user.name}
             onChange={handleChange}
             required
           />
@@ -48,7 +67,7 @@ function Signup() {
             className="form-control"
             id="department"
             name="department"
-            value={formData.department}
+            value={user.department}
             onChange={handleChange}
             required
           />
@@ -62,7 +81,7 @@ function Signup() {
             className="form-control"
             id="email"
             name="email"
-            value={formData.email}
+            value={user.email}
             onChange={handleChange}
             required
           />
@@ -76,7 +95,7 @@ function Signup() {
             className="form-control"
             id="password"
             name="password"
-            value={formData.password}
+            value={user.password}
             onChange={handleChange}
             required
           />
@@ -90,12 +109,12 @@ function Signup() {
             className="form-control"
             id="confirmPassword"
             name="confirmPassword"
-            value={formData.confirmPassword}
+            value={user.confirmPassword}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" value="register" className="btn btn-primary">
           Sign Up
         </button>
       </form>
