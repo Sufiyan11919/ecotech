@@ -3,6 +3,9 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 require('./config/connection')
+const routes = require('./routes/auth')
+app.use(express.json());
+app.use(routes);
 
 const middleware = (request, response,)=>{
     console.log("middleware");

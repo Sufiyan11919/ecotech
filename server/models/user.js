@@ -1,5 +1,5 @@
-const Schema = require('mongoose');
-const userSchema = new Schema(
+const mongoose = require('mongoose');
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -7,10 +7,11 @@ const userSchema = new Schema(
       unique: false,
       trim: true
     },
-    age: {
-      type: Number,
+    department: {
+      type: String,
       required: true,
-      unique: false
+      unique: false,
+      trim: true
     },
     email: {
       type: String,
@@ -28,19 +29,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    description: {
-      type: String,
-      required: true,
-      // minLength: 1,
-      // maxLength: 280
-    },
     image: {
       type: String,
       // required:true
       
-    },
-    toJSON: {
-      virtuals: true
     }
   }
 );
