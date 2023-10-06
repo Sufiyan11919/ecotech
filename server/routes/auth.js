@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 require('../config/connection')
@@ -36,24 +37,28 @@ router.post('/signup',(request, response)=>{
 
 });
 
-router.post('/signin',(request, response)=>{
-    const {email, password} = request.body;
-    if(!email || !password){
-        return response.status(422).json({error: "please fill all the fields"})
-    }
-    User.findOne({email: email})
-    .then((result) => {
-        if(!result){
-            return response.status(422).json({error: "invalid email or password"})
+//login route 
+router.post('/signin', async(request, response)=>{
+    try {
+        const {email, password} = request.body;
+        if(!email || !password){
+            return response.status(400).json({error: "please fill the data"})
         }
-        if(result.password === password){
-            return response.status(201).json({message: "user signed in successfully"})
+        const userLogin = await User.findOne({email: email});
+        if(userLogin){
+            const validation = await bcrypt.compare(password, userLogin.password);
+            const validationConfirm = await bcrypt.compare(password, userLogin.confirmPassword);
+            if(!validation && !validationConfirm){
+                response.status(400).json({error: "invalid credentials"})
+            }else{
+                response.json({message: "user signed in successfully"})
+            }
         }else{
-            return response.status(422).json({error: "invalid email or password"})
+            response.status(400).json({error: "invalid credentials"})
         }
-    }).catch((err) => {
-        console.log(err);
-    });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 module.exports = router;
