@@ -1,31 +1,3 @@
-// import React from 'react';
-// import ReactDom from 'react-dom/client';
-// // import {BrowserRouter as Router, Routes , Route} from 'react-router-dom';
-// import {createBrowserRouter, Router, RouterProvider} from 'react-router-dom'
-// import Home from './components/Home';
-
-
-// function App() {
-//   return (
-//     <Router>
-//       <div className="App">
-//         <header>
-//           <h1>My React Router App</h1>
-//         </header>
-//         <main>
-//           <Routes>
-//             <Route exact path="/" component={Home} />
-//             {/* <Home/> */}
-//             <Route path="/plant_detail" component={Home} /> 
-//             {/* <Home/> */}
-//           </Routes>
-//         </main>
-//       </div>
-//     </Router>
-//   );
-// }
-
-// export default App;
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
