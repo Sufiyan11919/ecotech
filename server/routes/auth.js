@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 require('../config/connection')
 const User = require('../models/user')
+const jwt = require('jsonwebtoken');
 router.get('/',(request, response)=>{
     response.send("hey")
 });  
@@ -48,6 +49,12 @@ router.post('/signin', async(request, response)=>{
         if(userLogin){
             const validation = await bcrypt.compare(password, userLogin.password);
             const validationConfirm = await bcrypt.compare(password, userLogin.confirmPassword);
+            const jwtToken = await userLogin.generateAuthToken();
+            console.log(jwtToken);
+            response.cookie("jwtoken", jwtToken, {
+                expires: new Date(Date.now() + 25892000000),
+                httpOnly: true
+            });
             if(!validation && !validationConfirm){
                 response.status(400).json({error: "invalid credentials"})
             }else{
