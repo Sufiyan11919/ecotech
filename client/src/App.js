@@ -1,18 +1,24 @@
 import React from 'react';
 import Navbar from './components/Navbar'
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home'
 import PlantDetail from './pages/PlantDetail'
 import PlantForm from './pages/PlantForm'
 import PlantProgress from './pages/PlantProgress'
+import Signup from './pages/Signup';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Navbar/>
-        <Home/>
-      </header>
-    </div>
+    <BrowserRouter> 
+          <Navbar/>
+    <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/detail" element={<PlantDetail/>}/> 
+          <Route path="/form" element={<PlantForm/>}/> 
+          <Route path="/progress" element={<PlantProgress/>}/>  
+          <Route path="/signup" element={<Signup/>}/>   
+          {/* <Route path="*" element={<h1>Not Found</h1>}/> */}
+    </Routes>  
+    </BrowserRouter>
   );
 }
 
