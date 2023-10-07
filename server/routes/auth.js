@@ -74,4 +74,12 @@ router.get('/profile', Authenticate, (request, response)=>{
     response.send(request.rootUser);
 });
 
+router.get('/logout', (request, response)=>{
+    console.log("logout");
+    response.clearCookie('jwtoken', {path: '/'});
+    response.status(200).send("user logout");
+});
+
+
+
 module.exports = router;

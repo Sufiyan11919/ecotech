@@ -33,7 +33,7 @@ function Login() {
         const data = await res.json();
         console.log('Login Successful:', data);
         window.alert('Login Successful');
-        navigate('/home');
+        navigate('/main');
       } else {
         console.error('Error occurred during login:', res.status, res.statusText);
         window.alert('An error occurred during login. Please try again later.');

@@ -8,6 +8,8 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Feeds from './pages/Feeds';
+import Main from './pages/Main';
+import Logout from './pages/Logout';
 function App() {
   return (
     <BrowserRouter> 
@@ -20,8 +22,8 @@ function App() {
           <Route path="/signup" element={<Signup/>}/>   
           <Route path="/login" element={<Login/>}/>
           <Route path="/feeds" element={<Feeds/>}/>
-          {/* <Route path="/userprofile" element={<UserProfile/>}/> */}
-
+          <Route path="/main" element={<Main/>}/>
+          <Route path="/logout" element={<Logout/>}/>
           <Route path="*" element={<h1>Not Found</h1>}/>
     </Routes>  
     </BrowserRouter>
