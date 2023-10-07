@@ -4,6 +4,7 @@ const router = express.Router();
 require('../config/connection')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken');
+const Authenticate = require('../utils/authJWT');
 router.get('/',(request, response)=>{
     response.send("hey")
 });  
@@ -66,6 +67,11 @@ router.post('/signin', async(request, response)=>{
     } catch (error) {
         console.log(error);
     }
+});
+
+router.get('/profile', Authenticate, (request, response)=>{
+    console.log("profile");
+    response.send(request.rootUser);
 });
 
 module.exports = router;

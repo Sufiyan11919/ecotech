@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../assests/CSS/signup.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 const Signup = () =>{
@@ -42,83 +43,91 @@ const Signup = () =>{
   }
   return (
     <div className="container">
-      <h2>Sign Up</h2>
-      <form method='POST' onSubmit={postData}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            value={user.name}
-            onChange={handleChange}
-            required
-          />
+    <div className="row justify-content-center mt-5">
+      <div className="col-md-6">
+        <div className="card signup-card">
+          <div className="card-body">
+            <h2 className="text-center mb-4">Sign Up</h2>
+            <form method="POST" onSubmit={postData}>
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  value={user.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="department" className="form-label">
+                  Department
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="department"
+                  name="department"
+                  value={user.department}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  value={user.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  value={user.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="confirmPassword" className="form-label">
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={user.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button type="submit" value="register" className="btn btn-primary">
+                Sign Up
+              </button>
+            </form>
+          </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="department" className="form-label">
-            Department
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="department"
-            name="department"
-            value={user.department}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="confirmPassword" className="form-label">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={user.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" value="register" className="btn btn-primary">
-          Sign Up
-        </button>
-      </form>
+      </div>
     </div>
+  </div>
   );
 }
 

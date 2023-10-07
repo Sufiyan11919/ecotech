@@ -1,27 +1,49 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Here, you can implement your authentication logic.
-    // For this example, we'll simply log the username and password.
-    console.log('Username:', username);
-    console.log('Password:', password);
-
-    // You can add your authentication logic here, e.g., make an API call.
+  
+    try {
+      const res = await fetch('/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (res.status === 400) {
+        window.alert('Invalid Credentials');
+        console.log('Invalid Credentials');
+      } else if (res.ok) {
+        const data = await res.json();
+        console.log('Login Successful:', data);
+        window.alert('Login Successful');
+        navigate('/home');
+      } else {
+        console.error('Error occurred during login:', res.status, res.statusText);
+        window.alert('An error occurred during login. Please try again later.');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      window.alert('An unexpected error occurred. Please try again later.');
+    }
   };
+  
 
   return (
     <div className="container">
@@ -30,18 +52,18 @@ function Login() {
           <div className="card">
             <div className="card-body">
               <h2 className="text-center">Login</h2>
-              <form onSubmit={handleSubmit}>
+              <form method='POST' onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="username">Username:</label>
+                  <label htmlFor="email">email:</label>
                   <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    value={username}
-                    onChange={handleUsernameChange}
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={handleEmailChange}
                     className="form-control"
                     autoComplete='off'
-                    placeholder='Enter username'
+                    placeholder='Enter email'
                     required
                   />
                 </div>

@@ -1,0 +1,16 @@
+.letter-by-letter {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .letter-by-letter span {
+    display: inline-block;
+    transform: translateY(1em);
+    opacity: 0;
+    animation: appear 0.5s forwards;
+  }
+  @keyframes appear {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
